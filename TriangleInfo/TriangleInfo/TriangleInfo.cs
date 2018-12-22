@@ -16,6 +16,15 @@ namespace TriangleInfo
                 throw new ArgumentException("All sides of the triangle must be positive in length.", "sideB");
             if (sideC <= 0)
                 throw new ArgumentException("All sides of the triangle must be positive in length.", "sideC");
+            if (sideA + sideB < sideC || sideB + sideC < sideA || sideC + sideA < sideB)
+                throw new InvalidTriangleException("No side of a triangle may be greater than the sum of the other two sides.");
         }
+    }
+
+    
+
+    public class InvalidTriangleException : Exception
+    {
+        public InvalidTriangleException(string message) : base(message) { }
     }
 }

@@ -39,5 +39,23 @@ namespace TriangleInfoTests
             Assert.ThrowsException<ArgumentException>(() => TriangleInfo.TriangleInfo.GetTriangleType(1, 1, 0));
         }
         #endregion
+
+        #region Valid Triangle Tests
+        [TestMethod]
+        public void GetTriangleType_ThrowsExceptionOnInvalidSideLengthsAB()
+        {
+            Assert.ThrowsException<InvalidTriangleException>(() => TriangleInfo.TriangleInfo.GetTriangleType(1, 1, 3));
+        }
+        [TestMethod]
+        public void GetTriangleType_ThrowsExceptionOnInvalidSideLengthsBC()
+        {
+            Assert.ThrowsException<InvalidTriangleException>(() => TriangleInfo.TriangleInfo.GetTriangleType(1, 3, 1));
+        }
+        [TestMethod]
+        public void GetTriangleType_ThrowsExceptionOnInvalidSideLengthsAC()
+        {
+            Assert.ThrowsException<InvalidTriangleException>(() => TriangleInfo.TriangleInfo.GetTriangleType(3, 1, 1));
+        }
+        #endregion
     }
 }
