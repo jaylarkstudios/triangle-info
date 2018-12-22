@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace TriangleInfo
 {
-    public enum TriangleType { Equilateral, Isoceles, Scalene }
-    public enum TriangleAngle { Acute, Right, Obtuse }
+    public enum TriangleType { None, Equilateral, Isosceles, Scalene }
+    public enum TriangleAngle { None, Acute, Right, Obtuse }
 }
