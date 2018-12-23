@@ -11,6 +11,8 @@ namespace TriangleInfo
         private const double FP_MARGIN = 0.00001;
         private const double RIGHT_ANGLE = Math.PI / 2;
 
+        //public static 
+
         public static TriangleInfo GetTriangleInfo(double sideA, double sideB, double sideC)
         {
             if (sideA <= 0)
