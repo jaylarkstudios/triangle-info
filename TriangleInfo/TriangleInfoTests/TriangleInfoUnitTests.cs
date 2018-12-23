@@ -110,5 +110,69 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleType.Scalene, info.Type);
         }
         #endregion
+
+        #region TriangleAngleTests
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideA()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(5, 3, 4);
+            var info2 = TriangleChecker.GetTriangleInfo(5, 4, 3);
+
+            Assert.AreEqual(TriangleAngle.Right, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Right, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideB()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(3, 5, 4);
+            var info2 = TriangleChecker.GetTriangleInfo(4, 5, 3);
+
+            Assert.AreEqual(TriangleAngle.Right, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Right, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideC()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(3, 4, 5);
+            var info2 = TriangleChecker.GetTriangleInfo(4, 3, 5);
+
+            Assert.AreEqual(TriangleAngle.Right, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Right, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideA()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(6, 3, 4);
+            var info2 = TriangleChecker.GetTriangleInfo(6, 4, 3);
+
+            Assert.AreEqual(TriangleAngle.Obtuse, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideB()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(3, 6, 4);
+            var info2 = TriangleChecker.GetTriangleInfo(4, 6, 3);
+
+            Assert.AreEqual(TriangleAngle.Obtuse, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideC()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(3, 4, 6);
+            var info2 = TriangleChecker.GetTriangleInfo(4, 3, 6);
+
+            Assert.AreEqual(TriangleAngle.Obtuse, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsAcuteOnAllAnglesLessThan90()
+        {
+            var info = TriangleChecker.GetTriangleInfo(3, 3, 2);
+
+            Assert.AreEqual(TriangleAngle.Acute, info.Angle);
+        }
+        #endregion
     }
 }
