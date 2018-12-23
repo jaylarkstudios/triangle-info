@@ -8,7 +8,7 @@ namespace TriangleInfo
 {
     public static class TriangleChecker
     {
-        private const double FP_MARGIN = 0.000000000001;
+        private const double FP_MARGIN = 0.00001;
         private const double RIGHT_ANGLE = Math.PI / 2;
 
         public static TriangleInfo GetTriangleInfo(double sideA, double sideB, double sideC)

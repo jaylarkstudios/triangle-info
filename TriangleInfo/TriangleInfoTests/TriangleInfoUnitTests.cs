@@ -73,7 +73,7 @@ namespace TriangleInfoTests
         }
         #endregion
 
-        #region TriangleTypeTests
+        #region Triangle Type Tests
         [TestMethod]
         public void GetTriangleInfo_ReturnsEquilateralOnAllEqualSides()
         {
@@ -111,7 +111,7 @@ namespace TriangleInfoTests
         }
         #endregion
 
-        #region TriangleAngleTests
+        #region Triangle Angle Tests
         [TestMethod]
         public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideA()
         {
@@ -172,6 +172,47 @@ namespace TriangleInfoTests
             var info = TriangleChecker.GetTriangleInfo(3, 3, 2);
 
             Assert.AreEqual(TriangleAngle.Acute, info.Angle);
+        }
+        #endregion
+
+        #region Unusual Size Precision Tests
+        // These tests are designed to ensure correct triangle info is returned even for triangles of very large/small sides/angles
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsObtuseOnLargeObtuseAngle()
+        {
+            // the obtuse angle is roughly 179.5 degrees (triangle is almost flat)
+
+            var info1 = TriangleChecker.GetTriangleInfo(20, 10.0001, 10.0001);
+            var info2 = TriangleChecker.GetTriangleInfo(10.0001, 20, 10.0001);
+            var info3 = TriangleChecker.GetTriangleInfo(10.0001, 10.0001, 20);
+
+            Assert.AreEqual(TriangleAngle.Obtuse, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info3.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsAcuteOnVeryCloseToRightAngle()
+        {
+            // two of the angles are roughly 89.999 degrees, making the third almost zero
+            var info1 = TriangleChecker.GetTriangleInfo(1, 30000, 30000);
+            var info2 = TriangleChecker.GetTriangleInfo(30000, 1, 30000);
+            var info3 = TriangleChecker.GetTriangleInfo(30000, 30000, 1);
+
+            Assert.AreEqual(TriangleAngle.Acute, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Acute, info2.Angle);
+            Assert.AreEqual(TriangleAngle.Acute, info3.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsRightOnLargeDiffBetweenLegs()
+        {
+            // One angle is 90 degrees, one is very close to 90, and one is very close to zero
+            var info1 = TriangleChecker.GetTriangleInfo(30000.00002, 30000, 1);
+            var info2 = TriangleChecker.GetTriangleInfo(1, 30000.00002, 30000);
+            var info3 = TriangleChecker.GetTriangleInfo(30000, 1, 30000.00002);
+
+            Assert.AreEqual(TriangleAngle.Right, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Right, info2.Angle);
+            Assert.AreEqual(TriangleAngle.Right, info3.Angle);
         }
         #endregion
     }
