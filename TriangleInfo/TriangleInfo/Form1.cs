@@ -43,18 +43,17 @@ namespace TriangleInfo
 
         private void ValidateTextInput(TextBox textBox, out double sideLength)
         {
-            // If any inputs are blank, display instructions.
-            if (string.IsNullOrEmpty(sideATextBox.Text) || string.IsNullOrEmpty(sideBTextBox.Text) || string.IsNullOrEmpty(sideCTextBox.Text))
-            {
-                messageText.Text = INSTRUCTIONS;
-                sideLength = 0;
-                return;
-            }
-
             // If current input is not a valid number, display invalid input error.
             if (!double.TryParse(textBox.Text, out sideLength))
             {
                 messageText.Text = ERR_INVALID_INPUT;
+                return;
+            }
+
+            // If any inputs are blank, display instructions.
+            if (string.IsNullOrEmpty(sideATextBox.Text) || string.IsNullOrEmpty(sideBTextBox.Text) || string.IsNullOrEmpty(sideCTextBox.Text))
+            {
+                messageText.Text = INSTRUCTIONS;
                 return;
             }
 
