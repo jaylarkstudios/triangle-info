@@ -5,21 +5,21 @@ using TriangleInfo;
 namespace TriangleInfoTests
 {
     [TestClass]
-    public class TriangleInfoUnitTests
+    public class GetTriangleInfoUnitTests
     {
         #region Valid Input Tests
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnNegativeSideA()
+        public void ThrowsExceptionOnNegativeSideA()
         {
             Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(-1, 1, 1));
         }
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnNegativeSideB()
+        public void ThrowsExceptionOnNegativeSideB()
         {
             Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(1, -1, 1));
         }
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnNegativeSideC()
+        public void ThrowsExceptionOnNegativeSideC()
         {
             Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(1, 1, -1));
         }
@@ -27,17 +27,17 @@ namespace TriangleInfoTests
 
         #region Valid Triangle Tests
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnAGreaterThanBC()
+        public void ThrowsExceptionOnAGreaterThanBC()
         {
             Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(3, 1, 1));
         }
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnBGreaterThanCA()
+        public void ThrowsExceptionOnBGreaterThanCA()
         {
             Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(1, 3, 1));
         }
         [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnCGreaterThanAB()
+        public void ThrowsExceptionOnCGreaterThanAB()
         {
             Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(1, 1, 3));
         }
@@ -45,35 +45,35 @@ namespace TriangleInfoTests
 
         #region Triangle Type Tests
         [TestMethod]
-        public void GetTriangleInfo_ReturnsEquilateralOnAllEqualSides()
+        public void ReturnsEquilateralOnAllEqualSides()
         {
             var info = TriangleChecker.GetTriangleInfo(1, 1, 1);
 
             Assert.AreEqual(TriangleType.Equilateral, info.Type);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsIsoscelesOnABEqual()
+        public void ReturnsIsoscelesOnABEqual()
         {
             var info = TriangleChecker.GetTriangleInfo(2, 2, 1);
 
             Assert.AreEqual(TriangleType.Isosceles, info.Type);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsIsoscelesOnBCEqual()
+        public void ReturnsIsoscelesOnBCEqual()
         {
             var info = TriangleChecker.GetTriangleInfo(1, 2, 2);
 
             Assert.AreEqual(TriangleType.Isosceles, info.Type);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsIsoscelesOnCAEqual()
+        public void ReturnsIsoscelesOnCAEqual()
         {
             var info = TriangleChecker.GetTriangleInfo(2, 1, 2);
 
             Assert.AreEqual(TriangleType.Isosceles, info.Type);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsScaleneOnNoEqualSides()
+        public void ReturnsScaleneOnNoEqualSides()
         {
             var info = TriangleChecker.GetTriangleInfo(2, 3, 4);
 
@@ -83,7 +83,7 @@ namespace TriangleInfoTests
 
         #region Triangle Angle Tests
         [TestMethod]
-        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideA()
+        public void ReturnsRightOnRightAngleOppSideA()
         {
             var info1 = TriangleChecker.GetTriangleInfo(5, 3, 4);
             var info2 = TriangleChecker.GetTriangleInfo(5, 4, 3);
@@ -92,7 +92,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Right, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideB()
+        public void ReturnsRightOnRightAngleOppSideB()
         {
             var info1 = TriangleChecker.GetTriangleInfo(3, 5, 4);
             var info2 = TriangleChecker.GetTriangleInfo(4, 5, 3);
@@ -101,7 +101,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Right, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsRightOnRightAngleOppSideC()
+        public void ReturnsRightOnRightAngleOppSideC()
         {
             var info1 = TriangleChecker.GetTriangleInfo(3, 4, 5);
             var info2 = TriangleChecker.GetTriangleInfo(4, 3, 5);
@@ -110,7 +110,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Right, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideA()
+        public void ReturnsObtuseOnObtuseAngleOppSideA()
         {
             var info1 = TriangleChecker.GetTriangleInfo(6, 3, 4);
             var info2 = TriangleChecker.GetTriangleInfo(6, 4, 3);
@@ -119,7 +119,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideB()
+        public void ReturnsObtuseOnObtuseAngleOppSideB()
         {
             var info1 = TriangleChecker.GetTriangleInfo(3, 6, 4);
             var info2 = TriangleChecker.GetTriangleInfo(4, 6, 3);
@@ -128,7 +128,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsObtuseOnObtuseAngleOppSideC()
+        public void ReturnsObtuseOnObtuseAngleOppSideC()
         {
             var info1 = TriangleChecker.GetTriangleInfo(3, 4, 6);
             var info2 = TriangleChecker.GetTriangleInfo(4, 3, 6);
@@ -137,7 +137,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsAcuteOnAllAnglesLessThan90()
+        public void ReturnsAcuteOnAllAnglesLessThan90()
         {
             var info = TriangleChecker.GetTriangleInfo(3, 3, 2);
 
@@ -148,7 +148,7 @@ namespace TriangleInfoTests
         #region Unusual Size Precision Tests
         // These tests are designed to ensure correct triangle info is returned even for triangles of very large/small sides/angles
         [TestMethod]
-        public void GetTriangleInfo_ReturnsObtuseOnLargeObtuseAngle()
+        public void ReturnsObtuseOnLargeObtuseAngle()
         {
             // the obtuse angle is roughly 179.5 degrees (triangle is almost flat)
 
@@ -161,7 +161,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Obtuse, info3.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsAcuteOnVeryCloseToRightAngle()
+        public void ReturnsAcuteOnVeryCloseToRightAngle()
         {
             // two of the angles are roughly 89.999 degrees, making the third almost zero
             var info1 = TriangleChecker.GetTriangleInfo(1, 30000, 30000);
@@ -173,7 +173,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Acute, info3.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsRightOnLargeDiffBetweenLegs()
+        public void ReturnsRightOnLargeDiffBetweenLegs()
         {
             // One angle is 90 degrees, one is very close to 90, and one is very close to zero
             var info1 = TriangleChecker.GetTriangleInfo(30000.00002, 30000, 1);
@@ -185,7 +185,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Right, info3.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsObtuseWhenTwoLegsEqualThird()
+        public void ReturnsObtuseWhenTwoLegsEqualThird()
         {
             var info1 = TriangleChecker.GetTriangleInfo(2, 1, 1);
             var info2 = TriangleChecker.GetTriangleInfo(1, 2, 1);
@@ -196,7 +196,7 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Obtuse, info3.Angle);
         }
         [TestMethod]
-        public void GetTriangleInfo_ReturnsAcuteWhenOneLegIsZero()
+        public void ReturnsAcuteWhenOneLegIsZero()
         {
             var info1 = TriangleChecker.GetTriangleInfo(0, 1, 1);
             var info2 = TriangleChecker.GetTriangleInfo(1, 0, 1);
