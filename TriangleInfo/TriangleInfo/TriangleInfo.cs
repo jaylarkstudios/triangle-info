@@ -8,6 +8,7 @@ namespace TriangleInfo
 {
     public static class TriangleChecker
     {
+        private const string ERR_NEGATIVE_LENGTH = "No side can have negative length.";
         private const double FP_MARGIN = 0.00001;
         private const double RIGHT_ANGLE = Math.PI / 2;
 
@@ -15,14 +16,14 @@ namespace TriangleInfo
 
         public static TriangleInfo GetTriangleInfo(double sideA, double sideB, double sideC)
         {
-            if (sideA <= 0)
-                throw new ArgumentException("All sides of the triangle must be positive in length.", "sideA");
-            if (sideB <= 0)
-                throw new ArgumentException("All sides of the triangle must be positive in length.", "sideB");
-            if (sideC <= 0)
-                throw new ArgumentException("All sides of the triangle must be positive in length.", "sideC");
-            if (sideA + sideB <= sideC || sideB + sideC <= sideA || sideC + sideA <= sideB)
-                throw new InvalidTriangleException("The length of each side must be less than the sum of the other two side lengths.");
+            if (sideA < 0)
+                throw new ArgumentException(ERR_NEGATIVE_LENGTH, "sideA");
+            if (sideB < 0)
+                throw new ArgumentException(ERR_NEGATIVE_LENGTH, "sideB");
+            if (sideC < 0)
+                throw new ArgumentException(ERR_NEGATIVE_LENGTH, "sideC");
+            if (sideC > sideA + sideB || sideA > sideB + sideC || sideB > sideC + sideA)
+                throw new InvalidTriangleException("No side's length can be greater than the sum of the other two.");
 
             var info = new TriangleInfo();
 

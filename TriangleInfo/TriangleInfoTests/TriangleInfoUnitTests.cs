@@ -23,21 +23,6 @@ namespace TriangleInfoTests
         {
             Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(1, 1, -1));
         }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnZeroSideA()
-        {
-            Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(0, 1, 1));
-        }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnZeroSideB()
-        {
-            Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(1, 0, 1));
-        }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnZeroSideC()
-        {
-            Assert.ThrowsException<ArgumentException>(() => TriangleChecker.GetTriangleInfo(1, 1, 0));
-        }
         #endregion
 
         #region Valid Triangle Tests
@@ -55,21 +40,6 @@ namespace TriangleInfoTests
         public void GetTriangleInfo_ThrowsExceptionOnCGreaterThanAB()
         {
             Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(1, 1, 3));
-        }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnAEqualToBC()
-        {
-            Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(2, 1, 1));
-        }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnBEqualToCA()
-        {
-            Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(1, 2, 1));
-        }
-        [TestMethod]
-        public void GetTriangleInfo_ThrowsExceptionOnCEqualToAB()
-        {
-            Assert.ThrowsException<InvalidTriangleException>(() => TriangleChecker.GetTriangleInfo(1, 1, 2));
         }
         #endregion
 
@@ -213,6 +183,28 @@ namespace TriangleInfoTests
             Assert.AreEqual(TriangleAngle.Right, info1.Angle);
             Assert.AreEqual(TriangleAngle.Right, info2.Angle);
             Assert.AreEqual(TriangleAngle.Right, info3.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsObtuseWhenTwoLegsEqualThird()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(2, 1, 1);
+            var info2 = TriangleChecker.GetTriangleInfo(1, 2, 1);
+            var info3 = TriangleChecker.GetTriangleInfo(1, 1, 2);
+
+            Assert.AreEqual(TriangleAngle.Obtuse, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info2.Angle);
+            Assert.AreEqual(TriangleAngle.Obtuse, info3.Angle);
+        }
+        [TestMethod]
+        public void GetTriangleInfo_ReturnsAcuteWhenOneLegIsZero()
+        {
+            var info1 = TriangleChecker.GetTriangleInfo(0, 1, 1);
+            var info2 = TriangleChecker.GetTriangleInfo(1, 0, 1);
+            var info3 = TriangleChecker.GetTriangleInfo(1, 1, 0);
+
+            Assert.AreEqual(TriangleAngle.Acute, info1.Angle);
+            Assert.AreEqual(TriangleAngle.Acute, info2.Angle);
+            Assert.AreEqual(TriangleAngle.Acute, info3.Angle);
         }
         #endregion
     }

@@ -13,8 +13,8 @@ namespace TriangleInfo
     public partial class Form1 : Form
     {
         private const string INSTRUCTIONS = "Enter the lengths of the three sides of a triangle.";
-        private const string ERR_INVALID_INPUT = "Each length must be a valid positive number.";
-        private const string ERR_INVALID_TRIANGLE = "Each length must be less than the sum of the other two.";
+        private const string ERR_INVALID_INPUT = "Only valid numbers are allowed!";
+        private const string ERR_INVALID_TRIANGLE = "No side's length can be greater than the sum of the other two.";
         private const string VALID_RESULT_TEXT = "These side lengths produce a valid {0} triangle";
 
         private double _sideA = 0;
