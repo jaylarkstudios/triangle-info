@@ -12,8 +12,6 @@ namespace TriangleInfo
         private const double FP_MARGIN = 0.00001;
         private const double RIGHT_ANGLE = Math.PI / 2;
 
-        //public static 
-
         public static TriangleInfo GetTriangleInfo(double sideA, double sideB, double sideC)
         {
             if (sideA < 0)
@@ -52,6 +50,18 @@ namespace TriangleInfo
                 info.Angle = TriangleAngle.Acute;
 
             return info;
+        }
+
+        public static bool IsValidKeystroke(string currentText, char key)
+        {
+            if (currentText == null)
+                throw new ArgumentException("currentText cannot be null", "currentText");
+            
+            if (!char.IsControl(key) && !char.IsDigit(key) && key != '.')
+                return false;
+            if (key == '.' && currentText.IndexOf('.') > -1)
+                return false;
+            return true;
         }
     }
 
