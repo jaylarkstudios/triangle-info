@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TriangleInfo
 {
-    public partial class Form1 : Form
+    public partial class TriangleInfoForm : Form
     {
         private const string INSTRUCTIONS = "Enter the lengths of the three sides of a triangle.";
         private const string ERR_INVALID_INPUT = "Only valid, non-negative numbers are allowed!";
@@ -21,7 +21,7 @@ namespace TriangleInfo
         private double _sideB = 0;
         private double _sideC = 0;
 
-        public Form1()
+        public TriangleInfoForm()
         {
             InitializeComponent();
             sideATextBox.KeyPress += TextBox_KeyPress;

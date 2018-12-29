@@ -1,6 +1,6 @@
 ﻿namespace TriangleInfo
 {
-    partial class Form1
+    partial class TriangleInfoForm
     {
         /// <summary>
         /// Required designer variable.
