@@ -13,7 +13,7 @@ namespace TriangleInfo
     public partial class Form1 : Form
     {
         private const string INSTRUCTIONS = "Enter the lengths of the three sides of a triangle.";
-        private const string ERR_INVALID_INPUT = "Only valid numbers are allowed!";
+        private const string ERR_INVALID_INPUT = "Only valid, non-negative numbers are allowed!";
         private const string ERR_INVALID_TRIANGLE = "No side's length can be greater than the sum of the other two.";
         private const string VALID_RESULT_TEXT = "These side lengths produce a valid {0} triangle";
 
@@ -24,6 +24,17 @@ namespace TriangleInfo
         public Form1()
         {
             InitializeComponent();
+            sideATextBox.KeyPress += TextBox_KeyPress;
+            sideBTextBox.KeyPress += TextBox_KeyPress;
+            sideCTextBox.KeyPress += TextBox_KeyPress;
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!TriangleChecker.IsValidKeystroke((sender as TextBox).Text, e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void sideATextBox_TextChanged(object sender, EventArgs e)
