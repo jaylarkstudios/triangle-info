@@ -63,6 +63,37 @@ namespace TriangleInfo
                 return false;
             return true;
         }
+
+        public static string GetTriangleName(TriangleInfo info)
+        {
+            var result = "";
+            switch (info.Angle)
+            {
+                case TriangleAngle.Acute:
+                    result = "acute";
+                    break;
+                case TriangleAngle.Right:
+                    result = "right";
+                    break;
+                case TriangleAngle.Obtuse:
+                    result = "obtuse";
+                    break;
+            }
+            switch (info.Type)
+            {
+                case TriangleType.Equilateral:
+                    // all equilateral triangles are also acute triangles, so no need to keep it in the name
+                    result = "equilateral";
+                    break;
+                case TriangleType.Isosceles:
+                    result += " isosceles";
+                    break;
+                case TriangleType.Scalene:
+                    result += " scalene";
+                    break;
+            }
+            return result;
+        }
     }
 
     public struct TriangleInfo

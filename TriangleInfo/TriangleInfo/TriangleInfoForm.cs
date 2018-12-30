@@ -12,10 +12,26 @@ namespace TriangleInfo
 {
     public partial class TriangleInfoForm : Form
     {
-        private const string INSTRUCTIONS = "Enter the lengths of the three sides of a triangle.";
-        private const string ERR_INVALID_INPUT = "Only valid, non-negative numbers are allowed!";
-        private const string ERR_INVALID_TRIANGLE = "No side's length can be greater than the sum of the other two.";
-        private const string VALID_RESULT_TEXT = "These side lengths produce a valid {0} triangle";
+        protected const string INSTRUCTIONS = "Enter the lengths of the three sides of a triangle.";
+        protected const string ERR_INVALID_INPUT = "Only valid, non-negative numbers are allowed!";
+        protected const string ERR_INVALID_TRIANGLE = "No side's length can be greater than the sum of the other two.";
+        protected const string VALID_RESULT_TEXT = "These side lengths produce a valid {0} triangle";
+
+        protected string SideAText
+        {
+            get { return sideATextBox.Text; }
+            set { sideATextBox.Text = value; }
+        }
+        protected string SideBText
+        {
+            get { return sideBTextBox.Text; }
+            set { sideBTextBox.Text = value; }
+        }
+        protected string SideCText
+        {
+            get { return sideCTextBox.Text; }
+            set { sideCTextBox.Text = value; }
+        }
 
         private double _sideA = 0;
         private double _sideB = 0;
@@ -73,7 +89,7 @@ namespace TriangleInfo
                 var info = TriangleChecker.GetTriangleInfo(_sideA, _sideB, _sideC);
 
                 // Side lenghts make a valid triangle! Display the triangle type.
-                messageText.Text = string.Format(VALID_RESULT_TEXT, GetTriangleName(info));
+                messageText.Text = GetTriangleMessage(info);
             }
             catch (ArgumentException)
             {
@@ -86,35 +102,10 @@ namespace TriangleInfo
                 messageText.Text = ERR_INVALID_TRIANGLE;
             }
         }
-        private string GetTriangleName(TriangleInfo info)
+
+        protected string GetTriangleMessage(TriangleInfo info)
         {
-            var result = "";
-            switch (info.Angle)
-            {
-                case TriangleAngle.Acute:
-                    result = "acute";
-                    break;
-                case TriangleAngle.Right:
-                    result = "right";
-                    break;
-                case TriangleAngle.Obtuse:
-                    result = "obtuse";
-                    break;
-            }
-            switch (info.Type)
-            {
-                case TriangleType.Equilateral:
-                    // all equilateral triangles are also acute triangles, so no need to keep it in the name
-                    result = "equilateral";
-                    break;
-                case TriangleType.Isosceles:
-                    result += " isosceles";
-                    break;
-                case TriangleType.Scalene:
-                    result += " scalene";
-                    break;
-            }
-            return result;
+            return string.Format(VALID_RESULT_TEXT, TriangleChecker.GetTriangleName(info));
         }
     }
 }
