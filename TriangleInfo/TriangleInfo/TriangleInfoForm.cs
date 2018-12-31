@@ -96,7 +96,7 @@ namespace TriangleInfo
 
             try
             {
-                var info = TriangleChecker.GetTriangleInfo(_sideA, _sideB, _sideC);
+                var info = TriangleChecker.GetTriangleStats(_sideA, _sideB, _sideC);
 
                 // Side lenghts make a valid triangle! Display the triangle type.
                 messageText.Text = GetTriangleMessage(info);
@@ -126,7 +126,7 @@ namespace TriangleInfo
             sideCTextBox.TextChanged += sideCTextBox_TextChanged;
         }
 
-        protected string GetTriangleMessage(TriangleInfo info)
+        protected string GetTriangleMessage(TriangleStats info)
         {
             return string.Format(VALID_RESULT_TEXT, TriangleChecker.GetTriangleName(info));
         }

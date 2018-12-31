@@ -10,7 +10,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void AcuteAngleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Acute,
                 Type = TriangleType.Scalene
@@ -23,7 +23,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void RightAngleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Right,
                 Type = TriangleType.Scalene
@@ -36,7 +36,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void ObtuseAngleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Obtuse,
                 Type = TriangleType.Scalene
@@ -49,7 +49,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void ScaleneTriangleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Acute,
                 Type = TriangleType.Scalene
@@ -62,7 +62,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void IsoscelesTriangleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Acute,
                 Type = TriangleType.Isosceles
@@ -75,7 +75,7 @@ namespace TriangleInfoUnitTests
         [TestMethod]
         public void EquilateralTriangleReturnsCorrectName()
         {
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Acute,
                 Type = TriangleType.Equilateral

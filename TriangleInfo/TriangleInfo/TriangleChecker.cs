@@ -6,13 +6,24 @@ using System.Threading.Tasks;
 
 namespace TriangleInfo
 {
+    /// <summary>
+    /// Contains methods for getting information about a triangle and validating input
+    /// </summary>
     public static class TriangleChecker
     {
         private const string ERR_NEGATIVE_LENGTH = "No side can have negative length.";
         private const double FP_MARGIN = 0.00001;
         private const double RIGHT_ANGLE = Math.PI / 2;
 
-        public static TriangleInfo GetTriangleInfo(double sideA, double sideB, double sideC)
+        /// <summary>
+        /// Calculates the stats of a triangle with the given side lengths.
+        /// Throws an exception if the sides do not create a valid triangle (triangles with zero area are allowed).
+        /// </summary>
+        /// <param name="sideA">The length of side A of the triangle.</param>
+        /// <param name="sideB">The length of side B of the triangle.</param>
+        /// <param name="sideC">The length of side C of the triangle.</param>
+        /// <returns>An object containing the triangle's stats.</returns>
+        public static TriangleStats GetTriangleStats(double sideA, double sideB, double sideC)
         {
             if (sideA < 0)
                 throw new ArgumentException(ERR_NEGATIVE_LENGTH, "sideA");
@@ -23,7 +34,7 @@ namespace TriangleInfo
             if (sideC > sideA + sideB || sideA > sideB + sideC || sideB > sideC + sideA)
                 throw new InvalidTriangleException("No side's length can be greater than the sum of the other two.");
 
-            var info = new TriangleInfo();
+            var info = new TriangleStats();
 
             // check side lengths
             var AeqB = sideA == sideB;
@@ -52,22 +63,33 @@ namespace TriangleInfo
             return info;
         }
 
-        public static bool IsValidKeystroke(string currentText, char key)
+        /// <summary>
+        /// Checks to see if a given keystroke would be valid given the current contents of a textbox.
+        /// </summary>
+        /// <param name="currentText">The text currently contained in the textbox.</param>
+        /// <param name="charKey">The character entered into the textbox.</param>
+        /// <returns>True if the keystroke would be valid, false otherwise.</returns>
+        public static bool IsValidKeystroke(string currentText, char charKey)
         {
             if (currentText == null)
                 throw new ArgumentException("currentText cannot be null", "currentText");
             
-            if (!char.IsControl(key) && !char.IsDigit(key) && key != '.')
+            if (!char.IsControl(charKey) && !char.IsDigit(charKey) && charKey != '.')
                 return false;
-            if (key == '.' && currentText.IndexOf('.') > -1)
+            if (charKey == '.' && currentText.IndexOf('.') > -1)
                 return false;
             return true;
         }
 
-        public static string GetTriangleName(TriangleInfo info)
+        /// <summary>
+        /// Gets the name of a triangle with the given stats.
+        /// </summary>
+        /// <param name="stats">The stats object of the triangle.</param>
+        /// <returns>The name of the triangle with the given stats.</returns>
+        public static string GetTriangleName(TriangleStats stats)
         {
             var result = "";
-            switch (info.Angle)
+            switch (stats.Angle)
             {
                 case TriangleAngle.Acute:
                     result = "acute";
@@ -79,7 +101,7 @@ namespace TriangleInfo
                     result = "obtuse";
                     break;
             }
-            switch (info.Type)
+            switch (stats.Type)
             {
                 case TriangleType.Equilateral:
                     // all equilateral triangles are also acute triangles, so no need to keep it in the name
@@ -96,7 +118,7 @@ namespace TriangleInfo
         }
     }
 
-    public struct TriangleInfo
+    public struct TriangleStats
     {
         public TriangleType Type;
         public TriangleAngle Angle;

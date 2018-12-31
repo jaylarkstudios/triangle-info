@@ -55,7 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TriangleInfo.cs" />
+    <Compile Include="TriangleChecker.cs" />
     <EmbeddedResource Include="TriangleInfoForm.resx">
       <DependentUpon>TriangleInfoForm.cs</DependentUpon>
     </EmbeddedResource>

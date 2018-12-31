@@ -50,7 +50,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetTriangleInfoUnitTests.cs" />
+    <Compile Include="GetTriangleStatsUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IsValidKeystrokeUnitTests.cs" />
     <Compile Include="TriangleInfoFormIntegrationTests.cs" />

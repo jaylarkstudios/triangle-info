@@ -204,7 +204,7 @@ namespace TriangleInfoIntegrationTests
         public void MessageTextShowsValidTriangleMessageOnValidSideLengths()
         {
             var form = new TriangleInfoFormForTest();
-            var info = new TriangleInfo.TriangleInfo()
+            var info = new TriangleStats()
             {
                 Angle = TriangleAngle.Acute,
                 Type = TriangleType.Equilateral
@@ -217,7 +217,7 @@ namespace TriangleInfoIntegrationTests
 
             Assert.AreEqual(expectedMsg, form.MessageText);
 
-            info = new TriangleInfo.TriangleInfo()
+            info = new TriangleStats()
             {
                 Angle = TriangleAngle.Right,
                 Type = TriangleType.Scalene
@@ -230,7 +230,7 @@ namespace TriangleInfoIntegrationTests
 
             Assert.AreEqual(expectedMsg, form.MessageText);
 
-            info = new TriangleInfo.TriangleInfo()
+            info = new TriangleStats()
             {
                 Angle = TriangleAngle.Obtuse,
                 Type = TriangleType.Isosceles
@@ -251,7 +251,7 @@ namespace TriangleInfoIntegrationTests
         public string MsgInstruction { get { return INSTRUCTIONS; } }
         public string MsgInvalidInput { get { return ERR_INVALID_INPUT; } }
         public string MsgInvalidTriangle { get { return ERR_INVALID_TRIANGLE; } }
-        public new string GetTriangleMessage(TriangleInfo.TriangleInfo info)
+        public new string GetTriangleMessage(TriangleStats info)
         {
             return base.GetTriangleMessage(info);
         }
