@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TriangleInfo;
 
-namespace TriangleInfoTests
+namespace TriangleInfoUnitTests
 {
     [TestClass]
     public class IsValidKeystrokeUnitTests

@@ -17,20 +17,21 @@ namespace TriangleInfo
         protected const string ERR_INVALID_TRIANGLE = "No side's length can be greater than the sum of the other two.";
         protected const string VALID_RESULT_TEXT = "These side lengths produce a valid {0} triangle";
 
-        protected string SideAText
+        protected TextBox SideATextBox
         {
-            get { return sideATextBox.Text; }
-            set { sideATextBox.Text = value; }
+            get { return sideATextBox; }
         }
-        protected string SideBText
+        protected TextBox SideBTextBox
         {
-            get { return sideBTextBox.Text; }
-            set { sideBTextBox.Text = value; }
+            get { return sideBTextBox; }
         }
-        protected string SideCText
+        protected TextBox SideCTextBox
         {
-            get { return sideCTextBox.Text; }
-            set { sideCTextBox.Text = value; }
+            get { return sideCTextBox; }
+        }
+        protected string MessageText
+        {
+            get { return messageText.Text; }
         }
 
         private double _sideA = 0;
@@ -45,7 +46,7 @@ namespace TriangleInfo
             sideCTextBox.KeyPress += TextBox_KeyPress;
         }
 
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        protected void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!TriangleChecker.IsValidKeystroke((sender as TextBox).Text, e.KeyChar))
             {
@@ -70,10 +71,16 @@ namespace TriangleInfo
 
         private void ValidateTextInput(TextBox textBox, out double sideLength)
         {
-            // If current input is not a valid number, display invalid input error.
-            if (!double.TryParse(textBox.Text, out sideLength))
+            // Allow text boxes that are empty or that contain only a single decimal.
+            if (string.IsNullOrEmpty(textBox.Text) || textBox.Text == ".")
+            {
+                sideLength = 0;
+            }
+            // If current input is not a valid number, clear text box and display invalid input error.
+            else if (!double.TryParse(textBox.Text, out sideLength))
             {
                 messageText.Text = ERR_INVALID_INPUT;
+                textBox.Text = string.Empty;
                 return;
             }
 
