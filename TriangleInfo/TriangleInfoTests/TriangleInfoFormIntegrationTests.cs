@@ -125,7 +125,124 @@ namespace TriangleInfoIntegrationTests
         #endregion
 
         #region Message Text Tests
+        [TestMethod]
+        public void MessageTextStartsWithInstructions()
+        {
+            var form = new TriangleInfoFormForTest();
 
+            Assert.AreEqual(form.MsgInstruction, form.MessageText);
+        }
+        [TestMethod]
+        public void MessageTextShowsInstructionsWhileAnyTextBoxesAreEmpty()
+        {
+            var form = new TriangleInfoFormForTest();
+
+            form.SideAText = "1";
+            form.SideCText = "2";
+
+            Assert.AreEqual(form.MsgInstruction, form.MessageText);
+        }
+        [TestMethod]
+        public void MessageTextShowsInstructionsAfterTextBoxIsCleared()
+        {
+            var form = new TriangleInfoFormForTest();
+
+            form.SideAText = "1";
+            form.SideBText = "2";
+            form.SideCText = "3";
+            form.SideAText = "";
+
+            Assert.AreEqual(form.MsgInstruction, form.MessageText);
+        }
+        [TestMethod]
+        public void MessageTextShowsErrorOnInvalidPastedInput()
+        {
+            var form = new TriangleInfoFormForTest();
+
+            form.SideAText = "1";
+            form.SideBText = "2";
+            form.SideCText = "x";
+
+            Assert.AreEqual(form.MsgInvalidInput, form.MessageText);
+
+            form.SideBText = "1";
+            form.SideCText = "2";
+            form.SideAText = "x";
+
+            Assert.AreEqual(form.MsgInvalidInput, form.MessageText);
+
+            form.SideCText = "1";
+            form.SideAText = "2";
+            form.SideBText = "x";
+
+            Assert.AreEqual(form.MsgInvalidInput, form.MessageText);
+        }
+        [TestMethod]
+        public void MessageTextShowsInvalidTriangleMessageOnInvalidSideLengths()
+        {
+            var form = new TriangleInfoFormForTest();
+
+            form.SideAText = "1";
+            form.SideBText = "1";
+            form.SideCText = "100";
+
+            Assert.AreEqual(form.MsgInvalidTriangle, form.MessageText);
+
+            form.SideAText = "1";
+            form.SideBText = "100";
+            form.SideCText = "1";
+
+            Assert.AreEqual(form.MsgInvalidTriangle, form.MessageText);
+
+            form.SideAText = "100";
+            form.SideBText = "1";
+            form.SideCText = "1";
+
+            Assert.AreEqual(form.MsgInvalidTriangle, form.MessageText);
+        }
+        [TestMethod]
+        public void MessageTextShowsValidTriangleMessageOnValidSideLengths()
+        {
+            var form = new TriangleInfoFormForTest();
+            var info = new TriangleInfo.TriangleInfo()
+            {
+                Angle = TriangleAngle.Acute,
+                Type = TriangleType.Equilateral
+            };
+            var expectedMsg = form.GetTriangleMessage(info);
+
+            form.SideAText = "1";
+            form.SideBText = "1";
+            form.SideCText = "1";
+
+            Assert.AreEqual(expectedMsg, form.MessageText);
+
+            info = new TriangleInfo.TriangleInfo()
+            {
+                Angle = TriangleAngle.Right,
+                Type = TriangleType.Scalene
+            };
+            expectedMsg = form.GetTriangleMessage(info);
+
+            form.SideAText = "3";
+            form.SideBText = "4";
+            form.SideCText = "5";
+
+            Assert.AreEqual(expectedMsg, form.MessageText);
+
+            info = new TriangleInfo.TriangleInfo()
+            {
+                Angle = TriangleAngle.Obtuse,
+                Type = TriangleType.Isosceles
+            };
+            expectedMsg = form.GetTriangleMessage(info);
+
+            form.SideAText = "2";
+            form.SideBText = "2";
+            form.SideCText = "3";
+
+            Assert.AreEqual(expectedMsg, form.MessageText);
+        }
         #endregion
     }
 
@@ -136,7 +253,7 @@ namespace TriangleInfoIntegrationTests
         public string MsgInvalidTriangle { get { return ERR_INVALID_TRIANGLE; } }
         public new string GetTriangleMessage(TriangleInfo.TriangleInfo info)
         {
-            return "";
+            return base.GetTriangleMessage(info);
         }
 
         public string SideAText {
@@ -153,7 +270,7 @@ namespace TriangleInfoIntegrationTests
             get { return SideCTextBox.Text; }
             set { SideCTextBox.Text = value; }
         }
-        public new string MessageText { get { return ""; } }
+        public string MessageText { get { return MessageLabel.Text; } }
 
         /// <summary>
         /// Simulate a keystroke on Side A TextBox.

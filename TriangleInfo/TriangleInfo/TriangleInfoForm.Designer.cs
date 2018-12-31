@@ -97,7 +97,7 @@
             this.messageText.TabIndex = 6;
             this.messageText.Text = "Enter the lengths of the three sides of a triangle.";
             // 
-            // Form1
+            // TriangleInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +109,7 @@
             this.Controls.Add(this.sideBTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sideATextBox);
-            this.Name = "Form1";
+            this.Name = "TriangleInfoForm";
             this.Text = "Triangle Info";
             this.ResumeLayout(false);
             this.PerformLayout();

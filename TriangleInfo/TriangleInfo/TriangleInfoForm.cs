@@ -29,9 +29,9 @@ namespace TriangleInfo
         {
             get { return sideCTextBox; }
         }
-        protected string MessageText
+        protected Label MessageLabel
         {
-            get { return messageText.Text; }
+            get { return messageText; }
         }
 
         private double _sideA = 0;
@@ -80,7 +80,10 @@ namespace TriangleInfo
             else if (!double.TryParse(textBox.Text, out sideLength))
             {
                 messageText.Text = ERR_INVALID_INPUT;
-                textBox.Text = string.Empty;
+                // Temporarily disable events to prevent firing when clearing the text box.
+                DisableTextBoxEvents();
+                textBox.Clear();
+                EnableTextBoxEvents();
                 return;
             }
 
@@ -108,6 +111,19 @@ namespace TriangleInfo
                 // Side lengths do not make a valid triangle; display invalid triangle error.
                 messageText.Text = ERR_INVALID_TRIANGLE;
             }
+        }
+
+        private void DisableTextBoxEvents()
+        {
+            sideATextBox.TextChanged -= sideATextBox_TextChanged;
+            sideBTextBox.TextChanged -= sideBTextBox_TextChanged;
+            sideCTextBox.TextChanged -= sideCTextBox_TextChanged;
+        }
+        private void EnableTextBoxEvents()
+        {
+            sideATextBox.TextChanged += sideATextBox_TextChanged;
+            sideBTextBox.TextChanged += sideBTextBox_TextChanged;
+            sideCTextBox.TextChanged += sideCTextBox_TextChanged;
         }
 
         protected string GetTriangleMessage(TriangleInfo info)
